@@ -28,7 +28,11 @@
 **Rigid Body with Colliders Preset** 会同时应用：
 
 - **Rigid Body API**：物体具有质量，并会受重力与外力影响。
+- <img width="800" height="519" alt="只加刚体" src="https://github.com/user-attachments/assets/0de8d4e2-e65d-40e6-bfda-30ba4d5c9377" />
+
 - **Collision API**：物体参与碰撞检测，避免穿模。
+- <img width="800" height="480" alt="刚体和碰撞" src="https://github.com/user-attachments/assets/5e5de1d0-e56a-4159-8ee5-ddac3108192a" />
+
 
 ## 3. 添加接触与摩擦参数
 
