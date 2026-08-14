@@ -1,53 +1,43 @@
-# Building a Simple Physics Scene
+# 创建一个简单的场景
 
-This note covers how to place objects in a scene, add physics, configure contact/friction materials, and assign visual materials in NVIDIA Isaac Sim.
+本笔记记录如何在 Isaac Sim 中放置场景对象、添加物理效果、配置接触/摩擦材质，以及分配视觉材质。
 
-In this example:
+在本示例中：
 
-- **Cube** → robot **Body**
-- **Cylinders** → left / right **Wheels**
+- **Cube** → 机器人 **Body（车身）**
+- **Cylinders** → 左右 **Wheels（车轮）**
 
-## 1. Add Objects to the Scene
+## 1. 添加物体
 
-1. Create three Xforms and rename them to Body, Wheel_left, and Wheel_right.
+1. 为 Body 和 Wheels 创建三个 **Xform**。
+2. 创建一个 **Cube** 作为 Body，两个 **Cylinder** 作为 Wheels。
+3. 调整每个物体的大小、位置和旋转，并将其放到对应的 Xform 下。
 
-2. Create a Cube for the body and two Cylinders for the wheels.
+**Xform 与 Mesh 的区别：**
 
-3.Adjust each mesh object's translate, rotate, and scale.
+- **Xform**：变换节点，相当于 Mesh 的“容器”，主要存储位置、旋转、缩放。
+- **Mesh**：网格节点，真正存储顶点与面片，也就是最终可见的几何形状。
 
-4.Drag the Cube and Cylinders under the corresponding Xform in the Stage tree 
+## 2. 添加物理属性
 
-# 2. Add Physics Properties
-1. In the Stage tree, multi-select the Body (Cube) and both Wheels (Cylinders):
-   - Hold **Ctrl** and click each prim, or
-   - Hold **Shift** if they are listed consecutively.
-2. Open the **Property** panel and click **+ Add**.
-3. Choose **Physics > Rigid Body with Colliders Preset**.
-4. Press **Play** and confirm that all three objects fall to the ground.
+1. 选中 Body 和 Wheels，按住左键点击 **+ Add**。
+2. 选择 **Physics > Rigid Body with Colliders Preset**，为物体添加刚体与碰撞。
 
-### What this preset does
+### 该预设的作用
 
-**Rigid Body with Colliders Preset** applies both:
+**Rigid Body with Colliders Preset** 会同时应用：
 
-- **Rigid Body API** — the object has mass and responds to gravity/forces  
-- **Collision API** — the object participates in collision detection  
+- **Rigid Body API**：物体具有质量，并会受重力与外力影响。
+- **Collision API**：物体参与碰撞检测，避免穿模。
 
-## 3. Add Contact and Friction Parameters
+## 3. 添加接触与摩擦参数
 
-1. From the menu bar, go to **Create > Physics > Physics Material**.
-2. Choose **Rigid Body Material**. A new `PhysicsMaterial` prim appears in the Stage tree.
-3. Tune the parameters such as friction coefficients and restitution in its property tab.
-   
-### Apply a physics material to an object
+1. 在菜单栏选择 **Create > Physics > Physics Material**。
+2. 选择 **Rigid Body Material**；Stage 中会出现 `PhysicsMaterial`。
+3. 在 Property 面板中调整摩擦系数等参数。
 
-1. Select the target object (Body or a Wheel) in the Stage tree.
-2. In the Property panel, find **Materials on Selected Model**.
-3. Choose the physics material from the dropdown.
+## 4. 分配视觉材质
 
-## 4. Assign Visual Materials
-
-1. Go to **Create > Materials > OmniPBR**.
-2. Right-click the new material in the Stage tree and rename it (for example `Body_Mat`, `Wheel_Mat`).
-3. Select Body or a Wheel, then in **Materials on Selected Model**, pick the matching material.
-4. Edit the material properties (for example **Shader / Albedo**, roughness, reflectivity) until the appearance looks right.
- 
+1. 点击 **Create > Materials > OmniPBR**。
+2. 选中 Body 或 Wheels，在 **Materials on Selected Model** 中选择合适的材质。
+3. 编辑材质属性（例如 **Shader / Albedo**、roughness、reflectivity）。
