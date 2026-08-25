@@ -17,3 +17,5 @@ AABB size 必须大约是 0.05 m。若仍是 1 或 2，缩放失败，夹不住�
 
 6.打印最终位置和移动距离
 
+最终结果
+<img width="400" height="365" alt="机械臂控制" src="https://github.com/user-attachments/assets/6a2e7409-4632-41c1-95ba-7a4082c5a89e" />
