@@ -1,6 +1,6 @@
 # Franka机械臂控制
 此笔记记录了如何控制Franka机械臂进行方块的抓取
-
+代码路径：[08-Franka机械臂控制](assets/08.Franka机械臂控制.py)
 1.创建场景，Franka和cube
 2.给cube补刚体、改成 dynamic、补碰撞、质量 0.05、加摩擦、弹性 0
 3.用prim path锁定抓取点和放置点
