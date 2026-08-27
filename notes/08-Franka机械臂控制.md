@@ -1,21 +1,13 @@
 # Franka机械臂控制
 此笔记记录了如何控制Franka机械臂进行方块的抓取
-代码路径：[机械臂控制](notes/08-Franka机械臂控制.py)
 
-1.创建场景，Franka和cube
-2.给cube补刚体、改成 dynamic、补碰撞、质量 0.05、加摩擦、弹性 0
-3.用prim path锁定抓取点和放置点
-4.控制台应出现类似：
-<img width="319" height="69" alt="image" src="https://github.com/user-attachments/assets/28544660-0c85-49b1-b257-f3091a55810a" />
-
-AABB size 必须大约是 0.05 m。若仍是 1 或 2，缩放失败，夹不住。
-
-5.保持 Play，创建抓放控制器
-观察 10 段动作：上方 → 下降 → 停顿 → 合爪 → 抬起 → 平移 → 放下 → 松开 → 抬起 → 收回。
-
-<img width="291" height="142" alt="image" src="https://github.com/user-attachments/assets/a43cb420-7265-41e7-873d-0cfd1620c0b1" />
-
-6.打印最终位置和移动距离
-
-最终结果
-<img width="400" height="365" alt="机械臂控制" src="https://github.com/user-attachments/assets/6a2e7409-4632-41c1-95ba-7a4082c5a89e" />
+1. 配置运行参数并准备Isaacsim启动
+2. 导入所需要的库
+3. 定义物理常量
+4. 构建环境和物体，并为物体加上刚体和碰撞
+5. 初始化机械臂控制器（__init__）
+6. 计算每个阶段的爪夹应该去哪（_ee_target）
+7. 识别方块位置并计算爪夹抓取姿态（_read_cube）
+8. 检查当前动作是否完成 (_converged)
+9. 下发具体控制指令并自动切换阶段（forward）
+10. 主程序
