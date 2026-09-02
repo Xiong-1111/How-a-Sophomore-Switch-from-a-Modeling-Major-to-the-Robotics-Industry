@@ -12,4 +12,4 @@
 6. [调节阻尼和刚度](notes/06-调节阻尼和刚度.md)
 7. [代理碰撞体](notes/07-代理碰撞体.md)
 8. [Franka机械臂控制](notes/08-Franka机械臂控制.md)
-9. [Semantic labels](notes/09-Semantic labels.md)
+9. [Semantic labels](notes/09-Semanticlabels.md)
