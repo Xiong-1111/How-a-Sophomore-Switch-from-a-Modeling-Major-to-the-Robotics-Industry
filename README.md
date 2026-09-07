@@ -13,4 +13,4 @@
 7. [代理碰撞体](notes/07-代理碰撞体.md)
 8. [Franka机械臂控制](notes/08-Franka机械臂控制.md)
 9. [Semantic labels](notes/09-Semanticlabels.md)
-10.[ROS2](notes/10-ROS2.md)
+10. [ROS2](notes/10-ROS2.md)
