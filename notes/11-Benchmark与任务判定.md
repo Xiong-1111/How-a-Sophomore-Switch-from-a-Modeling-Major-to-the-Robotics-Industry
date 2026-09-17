@@ -60,12 +60,6 @@
    （文件名是 `__init__.py`，前后各两个下划线。）
 
 <img width="663" height="31" alt="image" src="https://github.com/user-attachments/assets/333e9468-2b5e-4504-96fd-1633c18fa4c2" />
-   
-# 任务二：天工3.0+强脑手：左臂从传送带拿起开关零件放入托盘中
-tasks/TienKung3_Brainco2_tasks/TienKung3_Brainco2_task_01.py
-移植到TienKung3
-
-核心抓取逻辑不需要重写，但需要适配目标仓库的任务接口、场景路径、日志/评测参数，并修复源场景中的开关刚体问题。
 
 # 任务二：天工 3.0 + 强脑手（左臂从传送带拿开关零件放入托盘）
 
