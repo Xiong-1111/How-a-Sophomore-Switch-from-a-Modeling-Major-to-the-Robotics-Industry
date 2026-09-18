@@ -90,6 +90,12 @@
 3. 复位时同时恢复姿态并清速度  
 4. 移除外层的 **Rigid Body API**，避免无碰撞的坐标轴自己自由落体  
 
+# 任务二：天工3.0+强脑手：左臂从传送带拿起开关零件放入托盘中
+tasks/TienKung3_Brainco2_tasks/TienKung3_Brainco2_task_01.py
+移植到TienKung3
+
+核心抓取逻辑不需要重写，但需要适配目标仓库的任务接口、场景路径、日志/评测参数，并修复源场景中的开关刚体问题。
+
 ## 二、移植问题：新旧 Benchmark 流程不兼容
 
 源仓库天工 3 用的是旧流程：
@@ -102,11 +108,11 @@
 
 录像的作用：发观测时带上相机帧，方便事后查看机器人成功 / 失败原因。
 
-需要处理下面 5 处不兼容。
+两边接口不一致，移植时要处理下面 6 处不兼容。
 
-**1. 构造参数与 ZMQ 地址不同**
+**1. 构造参数不同**
 
-两边任务接口不一致。目标仓库构造函数多了：
+目标仓库的任务构造函数比源仓库多了这些参数：
 
 | 参数 | 含义 |
 |------|------|
@@ -116,25 +122,32 @@
 | `baseline` | 当前用哪种控制算法 / 策略 |
 | `seed` | 随机种子，便于复现 |
 
-ZMQ 地址也不能再写死成本机固定端口，要按目标仓库的跨机配置来。
+**修改：** 天工 3 任务类和天工 3 基类都补上上述参数；任务类接收后再传给基类。
 
-**2. 动作消息格式不同**
+**2. ZMQ 地址不同**
 
-- 源：旧格式，大致只有 `topic` + `data`  
-- 目标：**envelope**（外层封装），除动作外还有 `topic`、`payload`、`episode_id`、`step_id`、`timestamp`
+- 源天工3：端口写死，策略端地址用 ZMQ 类内部默认值  
+- 目标仓库：允许 Benchmark 和策略部署在不同机器、不同端口，因此用 **envelope ZMQ**
 
-**3. 观测格式不同**
+不改的话可能出现：端口和 Benchmark 配置对不上、任务发了观测但策略收不到、策略发了动作却连错主机。
 
-- 源：只采一个头部相机 RGB，发送时没有 episode 信息  
-- 目标：要 RGB、深度，并标注 `episode`、`step`，同时写入录像  
+**3. 动作消息格式不同**
 
-**4. 源工程没有目标录像流程**
+- 源天工3：旧格式，大致只有 `topic` + `data`  
+- 目标仓库：**envelope**，除动作外还有 `topic`、`payload`、`episode_id`、`step_id`、`timestamp`
+
+**4. 观测格式不同**
+
+- 源天工3：只采一个头部相机 RGB，发送时没有 episode 信息  
+- 目标仓库：要 RGB、深度，并标注 `episode`、`step`，同时写入录像  
+
+**5. 源工程没有目标录像流程**
 
 源天工 3 基类没有 `EpisodeVideoRecorder`；目标仓库要求每个 episode 保存独立录像。
 
-**5. 任务结束方式不同**
+**6. 任务结束方式不同**
 
-- 源：用 `status_file_path` 收尾  
-- 目标：不会给天工 3 传入 `status_file_path`，而是通过 **episode 生命周期、ZMQ reset、TaskManager、录像释放** 管理结束流程
-
+- 源天工3：用 `status_file_path` 收尾  
+- 目标仓库：不会给天工 3 传入 `status_file_path`，而是靠 **episode 生命周期、ZMQ reset、TaskManager、录像释放** 管理结束流程
+  
 <img width="663" height="31" alt="image" src="https://github.com/user-attachments/assets/02574102-87a6-4f91-bcad-88ddf3fb117f" />
