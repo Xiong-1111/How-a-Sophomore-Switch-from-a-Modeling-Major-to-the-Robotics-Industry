@@ -14,3 +14,4 @@
 8. [Franka机械臂控制](notes/08-Franka机械臂控制.md)
 9. [Semantic labels](notes/09-Semanticlabels.md)
 10. [ROS2](notes/10-ROS2.md)
+11. [Benchmark与任务判定](notes/11-Benchmark与任务判定.md)
